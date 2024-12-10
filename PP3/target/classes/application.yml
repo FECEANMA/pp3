@@ -1,0 +1,27 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+#Configuracion de spring
+spring:
+  #Configuracion de migracion
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+
+  datasource:
+    url: jdbc:postgresql://bubble.db.elephantsql.com/jnqtctqd
+    username: jnqtctqd
+    password: JjmK1cc5M6lqQO1C7OBTNf8bu-CllNed
+    driverClassName: org.postgresql.Driver
+    hikari:
+      maximumPoolSize: 10  # Ajusta este número según tus necesidades
+      minimumIdle: 2
+      idleTimeout: 30000
+      connectionTimeout: 30000
