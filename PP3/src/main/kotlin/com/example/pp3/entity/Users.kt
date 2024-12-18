@@ -1,4 +1,4 @@
-package com.example.PP3.entity
+package com.example.pp3.entity
 
 import jakarta.persistence.*
 
@@ -11,4 +11,6 @@ class Users {
     var id: Long? = null
     var username: String? = null
     var email: String? = null
+    var password: String? = null
+    var phone: Number? = null
 }

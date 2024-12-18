@@ -1,4 +1,4 @@
-package com.example.PP3.dto
+package com.example.pp3.dto
 
 import jakarta.validation.constraints.NotBlank
 import org.jetbrains.annotations.NotNull

@@ -1,7 +1,7 @@
-package com.example.PP3.mapper
+package com.example.pp3.mapper
 
-import com.example.PP3.dto.EventsDto
-import com.example.PP3.entity.Events
+import com.example.pp3.dto.EventsDto
+import com.example.pp3.entity.Events
 
 object EventsMapper {
     fun toEntity(eventsDto: EventsDto): Events{

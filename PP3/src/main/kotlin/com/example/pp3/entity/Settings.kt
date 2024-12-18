@@ -1,4 +1,4 @@
-package com.example.PP3.entity
+package com.example.pp3.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

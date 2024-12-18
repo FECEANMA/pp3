@@ -1,5 +1,6 @@
-package com.example.PP3.dto
+package com.example.pp3.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.validation.constraints.NotBlank
 import org.jetbrains.annotations.NotNull
 
@@ -11,4 +12,10 @@ class UsersDto {
     @NotNull
     @NotBlank(message = "Email is required")
     var email: String? = null
+
+    @jakarta.validation.constraints.NotNull(message = "Phone is required")
+    var phone: Number? = null
+
+
+    var password: String? = null
 }

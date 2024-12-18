@@ -1,9 +1,9 @@
-package com.example.PP3.service
+package com.example.pp3.service
 
-import com.example.PP3.dto.SettingsDto
-import com.example.PP3.entity.Settings
-import com.example.PP3.mapper.SettingsMapper
-import com.example.PP3.repository.SettingsRepository
+import com.example.pp3.dto.SettingsDto
+import com.example.pp3.entity.Settings
+import com.example.pp3.mapper.SettingsMapper
+import com.example.pp3.repository.SettingsRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

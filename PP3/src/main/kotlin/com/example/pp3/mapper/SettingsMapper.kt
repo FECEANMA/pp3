@@ -1,7 +1,7 @@
-package com.example.PP3.mapper
+package com.example.pp3.mapper
 
-import com.example.PP3.dto.SettingsDto
-import com.example.PP3.entity.Settings
+import com.example.pp3.dto.SettingsDto
+import com.example.pp3.entity.Settings
 
 object SettingsMapper {
     fun toEntity(settingsDto: SettingsDto): Settings {

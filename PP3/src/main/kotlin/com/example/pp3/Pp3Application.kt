@@ -1,4 +1,4 @@
-package com.example.PP3
+package com.example.pp3
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
