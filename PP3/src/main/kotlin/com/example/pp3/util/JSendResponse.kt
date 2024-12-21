@@ -1,4 +1,4 @@
-package com.example.pp3.util
+
 
 data class JSendResponse<T>(
     val status: String,
@@ -12,7 +12,7 @@ data class JSendResponse<T>(
         fun <T> fail(message: String, data: T? = null): JSendResponse<T> =
             JSendResponse(status = "fail", message = message, data = data)
 
-        fun error(message: String, code: Int): JSendResponse<Nothing> =
+        fun <T> error(message: String, code: Int? = null): JSendResponse<T> =
             JSendResponse(status = "error", message = message, code = code)
     }
 }

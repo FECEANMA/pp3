@@ -13,7 +13,7 @@ class UsersDto {
     var email: String? = null
 
     @jakarta.validation.constraints.NotNull(message = "Phone is required")
-    var phone: Number? = null
+    var phone: String? = null
 
 
     var password: String? = null

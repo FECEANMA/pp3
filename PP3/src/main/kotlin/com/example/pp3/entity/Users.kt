@@ -2,6 +2,7 @@ package com.example.pp3.entity
 
 import jakarta.persistence.*
 
+
 @Entity
 @Table(name = "users")
 class Users {
@@ -12,5 +13,5 @@ class Users {
     var username: String? = null
     var email: String? = null
     var password: String? = null
-    var phone: Number? = null
+    var phone: String? = null
 }
