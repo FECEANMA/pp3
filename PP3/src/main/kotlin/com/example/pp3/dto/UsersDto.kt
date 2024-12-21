@@ -1,6 +1,5 @@
 package com.example.pp3.dto
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.validation.constraints.NotBlank
 import org.jetbrains.annotations.NotNull
 
