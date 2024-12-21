@@ -3,6 +3,13 @@ package com.example.pp3.entity
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
+enum class EventType {
+    FUGA_DETECTADA,          // Fuga de gas detectada
+    VENTILADOR_ENCENDIDO,    // Ventilador encendido
+    VALVULA_CERRADA,         // Válvula de gas cerrada automáticamente
+    SISTEMA_REESTABLECIDO    // Sistema restablecido
+}
+
 @Entity
 @Table(name = "events")
 class Events {
@@ -10,8 +17,12 @@ class Events {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    var userId: String? = null
-    var eventType: String? = null
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "event_type")
+    var eventType: EventType? = null
+
+
     @Column(name = "event_time")
     var eventTime: LocalDateTime? = null
 
@@ -24,4 +35,8 @@ class Events {
     fun onUpdate() {
         eventTime = LocalDateTime.now()
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    var user: Users? = null
 }

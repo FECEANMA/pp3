@@ -1,8 +1,8 @@
 package com.example.pp3.controller
 
-import JSendResponse
 import com.example.pp3.dto.UsersDto
 import com.example.pp3.service.UsersService
+import com.example.pp3.util.JSendResponse
 import org.springframework.data.domain.Page
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

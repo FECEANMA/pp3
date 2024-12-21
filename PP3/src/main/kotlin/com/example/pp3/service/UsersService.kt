@@ -1,9 +1,9 @@
 package com.example.pp3.service
 
-import JSendResponse
 import com.example.pp3.dto.UsersDto
 import com.example.pp3.mapper.UsersMapper
 import com.example.pp3.repository.UsersRepository
+import com.example.pp3.util.JSendResponse
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest

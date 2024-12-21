@@ -1,6 +1,7 @@
 package com.example.pp3.entity
 
 import jakarta.persistence.*
+import java.awt.event.ActionEvent
 
 
 @Entity
@@ -14,4 +15,7 @@ class Users {
     var email: String? = null
     var password: String? = null
     var phone: String? = null
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var events: MutableList<Events> = mutableListOf()
 }
