@@ -1,6 +1,7 @@
 package com.example.pp3.entity
 
 import jakarta.persistence.*
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 enum class EventType {
@@ -22,6 +23,9 @@ class Events {
     @Column(name = "event_type")
     var eventType: EventType? = null
 
+
+    @Column(name = "gas_concentration", precision = 10, scale = 2)
+    var gasConcentration: BigDecimal? = null
 
     @Column(name = "event_time")
     var eventTime: LocalDateTime? = null

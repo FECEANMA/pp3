@@ -4,6 +4,7 @@ import com.example.pp3.entity.EventType
 import com.example.pp3.entity.Events
 import jakarta.validation.constraints.NotBlank
 import org.jetbrains.annotations.NotNull
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 class EventsDto {
@@ -17,5 +18,8 @@ class EventsDto {
 
     @NotNull
     var userId: Long?= null
+
+    @NotNull
+    var gasConcentration: BigDecimal? = null
 
 }

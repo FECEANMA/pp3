@@ -10,6 +10,7 @@ object EventsMapper {
         val events = Events()
         // Convertir el String de eventType al tipo enum correspondiente
         events.eventType = eventsDto.eventType?.let { EventType.valueOf(it) }
+        events.gasConcentration = eventsDto.gasConcentration
         events.eventTime = eventsDto.eventTime
         if (eventsDto.userId != null) {
             val user = Users().apply {
@@ -25,6 +26,7 @@ object EventsMapper {
             // Convertir el enum eventType de nuevo a String
             eventType = events.eventType?.name
             eventTime = events.eventTime
+            gasConcentration = events.gasConcentration
             userId = events.user?.id
         }
     }
