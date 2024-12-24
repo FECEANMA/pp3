@@ -4,18 +4,20 @@ import com.example.pp3.dto.UsersDto
 import com.example.pp3.mapper.UsersMapper
 import com.example.pp3.repository.UsersRepository
 import com.example.pp3.util.JSendResponse
+import com.example.pp3.util.JwtTokenProvider
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-
 
 @Service
 class UsersService(
     private val usersRepository: UsersRepository,
+    private val passwordEncoder: PasswordEncoder,
+    private val jwtTokenProvider: JwtTokenProvider
 ) {
-
 
     fun getUsers(page: Int, size: Int): JSendResponse<Page<UsersDto>> {
         val pageable = PageRequest.of(page, size)
@@ -23,7 +25,6 @@ class UsersService(
         val usersDtoPage = usersPage.map { UsersMapper.toDto(it) }
         return JSendResponse.success(usersDtoPage)
     }
-
 
     fun save(usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
         if (usersDto.email?.contains("@") != true) {
@@ -43,15 +44,12 @@ class UsersService(
         }
     }
 
-
-
     fun findById(userId: Long): ResponseEntity<JSendResponse<UsersDto>> {
         val user = usersRepository.findById(userId).orElseThrow {
             NoSuchElementException("User with ID $userId not found")
         }
         return ResponseEntity.ok(JSendResponse.success(UsersMapper.toDto(user)))
     }
-
 
     fun update(userId: Long, usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
         val existingUser = usersRepository.findById(userId).orElseThrow {
@@ -67,7 +65,6 @@ class UsersService(
         return ResponseEntity.ok(JSendResponse.success(UsersMapper.toDto(updatedUser)))
     }
 
-
     fun delete(userId: Long): ResponseEntity<JSendResponse<String>> {
         return if (usersRepository.existsById(userId)) {
             usersRepository.deleteById(userId)
@@ -76,4 +73,18 @@ class UsersService(
             ResponseEntity.badRequest().body(JSendResponse.error("User with ID $userId not found"))
         }
     }
+
+    fun login(email: String, password: String): ResponseEntity<JSendResponse<Map<String, String>>> {
+        val user = usersRepository.findByEmail(email) ?: throw IllegalArgumentException("Credenciales inválidas")
+
+        if (!passwordEncoder.matches(password, user.password)) {
+            throw IllegalArgumentException("Credenciales inválidas")
+        }
+
+        val token = jwtTokenProvider.createToken(email)
+        val response = mapOf("token" to token)
+
+        return ResponseEntity.ok(JSendResponse.success(response))
+    }
+
 }

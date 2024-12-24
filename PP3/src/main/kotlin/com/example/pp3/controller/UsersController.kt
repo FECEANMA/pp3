@@ -46,4 +46,13 @@ class UsersController(
     fun delete(@PathVariable id: Long): ResponseEntity<JSendResponse<String>> {
         return usersService.delete(id)
     }
+
+    @PostMapping("/login")
+    fun login(@RequestBody credentials: Map<String, String>): ResponseEntity<JSendResponse<Map<String, String>>> {
+        val email = credentials["email"] ?: throw IllegalArgumentException("El email es requerido")
+        val password = credentials["password"] ?: throw IllegalArgumentException("La contraseña es requerida")
+
+        return usersService.login(email, password)
+    }
+
 }
