@@ -32,4 +32,16 @@ class JwtTokenProvider {
             false
         }
     }
+
+    // Método para extraer el subject (email) del token
+
+    fun extractSubject(token: String): String {
+        val algorithm = Algorithm.HMAC512(secretKey)
+        val verifier = JWT.require(algorithm)
+            .build()
+
+        val decodedJWT = verifier.verify(token)
+        return decodedJWT.subject
+    }
+
 }
