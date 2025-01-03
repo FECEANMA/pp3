@@ -23,10 +23,6 @@ class UsersController(
         return usersPage
     }
 
-    @PostMapping
-    fun save(@RequestBody usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
-        return usersService.save(usersDto)
-    }
 
     @PostMapping("/register")
     fun register(@RequestBody usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
