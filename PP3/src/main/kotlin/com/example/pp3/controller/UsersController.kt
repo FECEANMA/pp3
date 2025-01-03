@@ -23,24 +23,25 @@ class UsersController(
         return usersPage
     }
 
-
     @PostMapping
     fun save(@RequestBody usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
         return usersService.save(usersDto)
     }
 
+    @PostMapping("/register")
+    fun register(@RequestBody usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
+        return usersService.save(usersDto)
+    }
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long): ResponseEntity<JSendResponse<UsersDto>> {
         return usersService.findById(id)
     }
 
-
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody usersDto: UsersDto): ResponseEntity<JSendResponse<UsersDto>> {
         return usersService.update(id, usersDto)
     }
-
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<JSendResponse<String>> {
@@ -52,7 +53,7 @@ class UsersController(
         val email = credentials["email"] ?: throw IllegalArgumentException("El email es requerido")
         val password = credentials["password"] ?: throw IllegalArgumentException("La contraseña es requerida")
 
-        return usersService.login(email, password)
+        val response = usersService.login(email, password)
+        return ResponseEntity.ok(response)
     }
-
 }

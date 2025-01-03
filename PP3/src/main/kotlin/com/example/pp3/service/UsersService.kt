@@ -4,19 +4,15 @@ import com.example.pp3.dto.UsersDto
 import com.example.pp3.mapper.UsersMapper
 import com.example.pp3.repository.UsersRepository
 import com.example.pp3.util.JSendResponse
-import com.example.pp3.util.JwtTokenProvider
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class UsersService(
-    private val usersRepository: UsersRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val jwtTokenProvider: JwtTokenProvider
+    private val usersRepository: UsersRepository
 ) {
 
     fun getUsers(page: Int, size: Int): JSendResponse<Page<UsersDto>> {
@@ -56,7 +52,6 @@ class UsersService(
             NoSuchElementException("User with ID $userId not found")
         }
 
-        // Actualiza solo los campos necesarios
         existingUser.username = usersDto.username ?: existingUser.username
         existingUser.email = usersDto.email ?: existingUser.email
         existingUser.phone = usersDto.phone ?: existingUser.phone
@@ -74,17 +69,14 @@ class UsersService(
         }
     }
 
-    fun login(email: String, password: String): ResponseEntity<JSendResponse<Map<String, String>>> {
+    fun login(email: String, password: String): JSendResponse<Map<String, String>> {
         val user = usersRepository.findByEmail(email) ?: throw IllegalArgumentException("Credenciales inválidas")
 
-        if (!passwordEncoder.matches(password, user.password)) {
+        if (user.password != password) {
             throw IllegalArgumentException("Credenciales inválidas")
         }
+        val response = mapOf("message" to "Login exitoso")
 
-        val token = jwtTokenProvider.createToken(email)
-        val response = mapOf("token" to token)
-
-        return ResponseEntity.ok(JSendResponse.success(response))
+        return JSendResponse.success(response)
     }
-
 }
